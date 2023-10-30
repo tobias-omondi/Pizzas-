@@ -18,11 +18,10 @@ api = Api(app)
 class Home(Resource):
     def get(self):
         response_dict = {
-            "message": "Welcome to my API of Super heroes"
+            "message": "Welcome to the Best Offers Pizza"
         }
         response = make_response(
-            jsonify(response_dict),
-            200,
+            jsonify(response_dict),200,
         )
         return response
 api.add_resource(Home, "/")

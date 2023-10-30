@@ -5,36 +5,39 @@ from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 
-class Restaurant (db.model, SerializerMixin):
+class Restaurant(db.Model, SerializerMixin):
     __tablename__ = 'restaurant'
     serialize_rules = ('-restaurant_pizzas')
 
-    id = db.column(db.Interger,primary_key = True)
-    name = db.column(db.String(250),nullable= False)
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(250),nullable= False)
     address = db.Column(db.String(255), nullable=False)
     # lets make relationship
     Pizzas =db.relationship('RestaurantPizza', backref='restaurant')
+    
+    def __repr__(self):
+        return f'<Restaurant {self.name} aka {self.address}>'
 
-
-class Pizza (db.model,SerializerMixin):
+class Pizza (db.Model,SerializerMixin):
 
     __tablename__ ='pizza'
     serialize_rules = ('-pizza_restaurant')
 
-    id = db.column(db.Interger,primary_key = True)
-    name = db.column(db.String(250),nullable= False)
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(250),nullable= False)
     ingredients = db.Column(db.String(255), nullable=False)
 # making relationship
 
     Restaurants = db.relationship('RestaurantPizza', backref='pizza')
+    def __repr__(self):
+        return f'<Pizza {self.name} aka {self.ingredients}>'
 
-
-class RestaurantPizza (db.model,SerializerMixin):
+class RestaurantPizza (db.Model,SerializerMixin):
     __tablename__=  'restaurant_pizaa'
     serialize_rules = ('-restaurant_pizzas','-pizza_restaurant')
 
-    id = db.column(db.Interger,primary_key = True)
-    price = db.Column(db.Decimal(10, 2), nullable=False)
+    id = db.Column(db.Integer,primary_key = True)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
     
     # making foreign key
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'), primary_key=True)
