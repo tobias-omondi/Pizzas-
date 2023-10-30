@@ -40,8 +40,8 @@ class RestaurantPizza (db.Model,SerializerMixin):
     price = db.Column(db.Numeric(10, 2), nullable=False)
     
     # making foreign key
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'), primary_key=True)
-    pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'), primary_key=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), primary_key=True)
+    pizza_id = db.Column(db.Integer, db.ForeignKey('pizza.id'), primary_key=True)
 
 # adding validation rules
 
