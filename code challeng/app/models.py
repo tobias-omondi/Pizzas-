@@ -36,7 +36,7 @@ class RestaurantPizza (db.Model,SerializerMixin):
     __tablename__=  'restaurant_pizaa'
     serialize_rules = ('-restaurant_pizzas','-pizza_restaurant')
 
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     
     # making foreign key
